@@ -2,7 +2,6 @@
 
 with open("list.txt", 'r') as file:
     data = file.read().split('\n')
-    data.pop()
 
     biggest = 0
     second = 0
@@ -11,13 +10,18 @@ with open("list.txt", 'r') as file:
 
     for element in data:
         if (element == ''):
+            print("Add ", add)
             if (add >= biggest):
                 biggest = add
-            elif (add >= second):
+            if (add >= second and add < biggest):
                 second = add
-            elif (add >= last):
+            if (add >= last or last == 0):
                 last = add
+
+            add = 0
         else:
             add += int(element)
 
-    print(biggest)
+    print("Biggest: ", biggest)
+    print("Second: ", second)
+    print("Last: ", last)
