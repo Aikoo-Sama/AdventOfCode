@@ -5,3 +5,4 @@
 ## 🍃 Current langages :
 
 - JS
+- Python
