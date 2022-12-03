@@ -1,9 +1,10 @@
 ## 🍁 My attempt to advent of code event in different languages
 
-- 🍀 **Why ?** Cause it's fun
+-   🍀 **Why ?** Cause it's fun
 
 ## 🍃 Current langages :
 
-- JS
-- Python
-- C++
+-   JS
+-   Python
+-   C++
+-   Kotlin
