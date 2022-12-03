@@ -1,56 +1,41 @@
-const fs = require("fs");
-const path = require("path");
+const readline = require('readline');
+const fs = require('fs');
+const path = require('path');
 
-const list = fs.readFileSync(path.join(__dirname, "list.txt"), "utf8");
-const elvesArray = list.split("\n\n");
-
-const elves = elvesArray.map((elf) => {
-  return elf.split("\n");
+const reader = new readline.createInterface({
+    input: fs.createReadStream(path.join(__dirname, 'list.txt')),
 });
 
-function findMostCalories() {
-  let max = 0;
-  for (elve in elves) {
-    const calories = sumCalories(elves[elve]);
-    if (calories > max) {
-      max = calories;
+const arr = [];
+let add = 0;
+
+reader.on('line', (line) => {
+    if (line === '') {
+        arr.push(add);
+        add = 0;
+    } else {
+        add += parseInt(line);
     }
-  }
+});
 
-  return max;
-}
+reader.on('close', () => {
+    let one = Math.max(...arr);
+    let two = 0;
+    let three = 0;
 
-function getTopThree() {
-  const one = parseInt(findMostCalories());
-  let two = 0;
-  let three = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] >= two && arr[i] < one) {
+            two = arr[i];
+        }
 
-  for (elve in elves) {
-    const calories = parseInt(sumCalories(elves[elve]));
-
-    if (calories < one && calories >= two) {
-      two = calories;
+        if (arr[i] >= three && arr[i] < two) {
+            three = arr[i];
+        }
     }
 
-    if ((calories < two && calories >= three) || three == 0) {
-      three = calories;
-    }
-  }
+    console.log(one);
+    console.log(two);
+    console.log(three);
 
-  return [one, two, three];
-}
-
-function sumCalories(elve) {
-  let calories = 0;
-  let i;
-  elve.forEach((calorie) => {
-    if (!isNaN(calorie) && calorie !== "") {
-      calories += parseInt(calorie);
-    }
-  });
-
-  return calories;
-}
-
-const topThree = getTopThree();
-console.log("Top #1 : " + topThree[0] + "\nTop#2 : " + topThree[1] + "\nTop#3 : " + topThree[2] + "\nSum : " + (topThree[0] + topThree[1] + topThree[2]));
+    console.log(one + two + three);
+});
