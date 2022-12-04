@@ -4,7 +4,6 @@
 
 ## 🍃 Current langages :
 
--   JS
 -   Python
 -   C++
 -   Kotlin
