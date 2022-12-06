@@ -1,11 +1,30 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
+#include <string>
+
+enum Issues {
+    X,
+    Y,
+    Z
+};
+
+enum OpponentChoose {
+    A,
+    B,
+    C
+};
+
+std::map<std::string, Issues> mapIssue;
+std::map<std::string, OpponentChoose> mapOpponentChoose;
 
 std::vector<std::string> split(std::string line, char delimiter);
-
+void initMap();
 
 int main() {
+    initMap();
+
     std::ifstream input("guide.txt");
     int total = 0;
 
@@ -15,47 +34,58 @@ int main() {
         std::string opponentChoose = splitLine[0];
         std::string issue = splitLine[1];
 
-        if (issue == "X") {
-            issue = "loose";
-            total += 0;
-        } else if (issue == "Y") {
-            issue = "tie";
-            total += 3;
-        } else if (issue == "Z") {
-            issue = "win";
-            total += 6;
+        switch(mapIssue[issue]) {
+            case X:
+                total += 0;
+                break;
+            case Y:
+                total += 3;
+                break;
+            case Z:
+                total += 6;
+                break;
         }
 
-        /* Reminds:
-        rock = 1
-        paper = 2
-        scissors = 3
-        */
-
-        if (opponentChoose == "A") { // rock
-            if (issue == "win") {
-                total += 2;
-            } else if (issue == "tie") {
-                total += 1;
-            } else if (issue == "loose") {
-                total += 3;
-            }
-        } else if (opponentChoose == "B") { // paper
-            if (issue == "win") {
-                total += 3;
-            } else if (issue == "tie") {
-                total += 2;
-            } else if (issue == "loose") {
-                total += 1;
-            }
-        } else if (opponentChoose == "C") { // Scissors
-            if (issue == "win") {
-                total += 1;
-            } else if (issue == "tie") {
-                total += 3;
-            } else if (issue == "loose") {
-                total += 2;
-            }
+        switch(mapOpponentChoose[opponentChoose]) {
+            case A:
+                switch (mapIssue[issue]) {
+                    case X:
+                        total += 3;
+                        break;
+                    case Y:
+                        total += 1;
+                        break;
+                    case Z:
+                        total += 2;
+                        break;
+                }
+                break;
+            case B:
+                switch (mapIssue[issue]) {
+                    case X:
+                        total += 1;
+                        break;
+                    case Y:
+                        total += 2;
+                        break;
+                    case Z:
+                        total += 3;
+                        break;
+                }
+                break;
+            case C:
+                switch (mapIssue[issue]) {
+                    case X:
+                        total += 2;
+                        break;
+                    case Y:
+                        total += 3;
+                        break;
+                    case Z:
+                        total += 1;
+                        break;
+                }
+                break;
         }
     }
 
@@ -80,4 +110,14 @@ std::vector<std::string> split(std::string line, char delimiter) {
     splitLine.push_back(word);
 
     return splitLine;
+}
+
+void initMap() {
+    mapIssue["X"] = X;
+    mapIssue["Y"] = Y;
+    mapIssue["Z"] = Z;
+
+    mapOpponentChoose["A"] = A;
+    mapOpponentChoose["B"] = B;
+    mapOpponentChoose["C"] = C;
 }
