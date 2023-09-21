@@ -4,6 +4,6 @@
 
 ## 🍃 Current langages :
 
--   [Python](/github/Noelle-Ai/AdventOfCode/tree/Python)
--   [C++](/github/Noelle-Ai/AdventOfCode/tree/C++)
--   [C#](/github/Noelle-Ai/AdventOfCode/tree/C%23)
+-   [Python](https://github.com/Noelle-Ai/AdventOfCode/tree/Python)
+-   [C++](https://github.com/Noelle-Ai/AdventOfCode/tree/C++)
+-   [C#](https://github.com/Noelle-Ai/AdventOfCode/tree/C%23)
