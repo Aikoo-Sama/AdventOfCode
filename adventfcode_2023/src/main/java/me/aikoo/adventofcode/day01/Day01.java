@@ -44,25 +44,9 @@ public class Day01 {
             this.getDigits();
         }
 
-        /**
-         * Four cases:
-         * 1. firstChar is int and lastChar is int
-         * 2. firstChar is int and lastChar is not int (so there is at least one int in the middle)
-         * 3. firstChar is not int and lastChar is int (so there is at least one int in the middle)
-         * 4. firstChar is not int and lastChar is not int (so there is at least one int in the middle)
-         */
         private void getDigits() {
             if (Character.isDigit(firstChar) && Character.isDigit(lastChar)) {
                 firstNumber = Integer.parseInt(String.valueOf(firstChar));
-                lastNumber = Integer.parseInt(String.valueOf(lastChar));
-            } else if (Character.isDigit(firstChar) && !Character.isDigit(lastChar)) {
-                firstNumber = Integer.parseInt(String.valueOf(firstChar));
-                lastNumber =
-                    (!allNumbers.isEmpty())
-                        ? allNumbers.get(allNumbers.size() - 1)
-                        : alphabet.indexOf(String.valueOf(lastChar)) + 1;
-            } else if (!Character.isDigit(firstChar) && Character.isDigit(lastChar)) {
-                firstNumber = (!allNumbers.isEmpty()) ? allNumbers.get(0) : alphabet.indexOf(String.valueOf(firstChar)) + 1;
                 lastNumber = Integer.parseInt(String.valueOf(lastChar));
             } else {
                 firstNumber = allNumbers.get(0);
